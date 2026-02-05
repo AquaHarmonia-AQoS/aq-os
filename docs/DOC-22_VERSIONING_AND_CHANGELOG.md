@@ -222,4 +222,62 @@ If change feels easy, it is probably unsafe.
 
 AQ-OS evolves slowly by design.
 
+---
+
+## Echo 4.1 — Clarification Pass (MINOR)
+
+**Date:** 2026-02-06  
+**Change Type:** Clarification / Documentation (Non-breaking)
+
+### Summary
+
+Echo 4.1 is a bounded clarification release focused on reducing implementation ambiguity, tightening metaphor enforcement, and lowering onboarding friction **without modifying any LOCKED constraints or authority structures**.
+
+No invariants were changed.  
+No promotion rules were altered.  
+No new authority was introduced.
+
+### Changes Included
+
+- **DOC-24 — Daily Log**
+  - Clarified that the document is a persistent container with decaying contents.
+  - Resolves self-decay ambiguity without altering behavior or authority.
+
+- **DOC-18 — Myth & Metaphor Map**
+  - Added a metaphor kill-switch rule preventing metaphor from resolving disagreement without testable structure.
+  - Strengthens Guardian refusal grounds and reduces narrative authority risk.
+
+- **DOC-26 — Operator Execution Profiles (NEW, SPEC)**
+  - Introduced execution profiles describing constraints, observables, and failure signatures for selected operators.
+  - Bridges operator definitions and implementation constraints without prescribing usage or intent.
+
+- **DOC-00 — Quick Start (NEW, SPEC)**
+  - Added a minimal, non-authoritative walkthrough demonstrating Sentinel detection and safe Exit.
+  - Intended solely as orientation; does not demonstrate promotion, resolution, or best practices.
+
+### Explicit Non-Changes
+
+The following were **not** modified in this release:
+
+- Core invariants
+- Authority model
+- Exit / Return protocol
+- Promotion or gating rules
+- Kernel or flow operator definitions
+
+### Rationale
+
+This release addresses identified ambiguity and onboarding friction while preserving AQ-OS’s core safety properties.  
+Clarification was preferred over expansion.  
+Additive SPEC documents were used instead of modifying LOCKED canon.
+
+### Rollback Note
+
+All changes in Echo 4.1 are fully reversible by removing SPEC documents or reverting editorial clarifications.  
+No irreversible structural commitments were made.
+
+---
+
+
 End of DOC-22
+
