@@ -1,0 +1,92 @@
+.gitignore
+
+# =========================
+# OS / Editor Noise
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# =========================
+# IDE / Editor Config
+# =========================
+.vscode/
+.idea/
+*.code-workspace
+
+# =========================
+# Python / General Runtime
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+ENV/
+
+# =========================
+# Build / Generated Artifacts
+# =========================
+dist/
+build/
+*.egg-info/
+*.whl
+
+# =========================
+# PDFs / Generated Outputs
+# =========================
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.bbl
+paper/*.blg
+
+# =========================
+# Notebooks / Scratch
+# =========================
+.ipynb_checkpoints/
+*.ipynb
+
+# =========================
+# Local Experiments / Scratchpads
+# =========================
+scratch/
+experiments/
+notes_local/
+drafts_private/
+
+# =========================
+# Secrets / Credentials
+# =========================
+*.key
+*.pem
+*.crt
+*.secret
+secrets/
+credentials/
+
+# =========================
+# Execution Traces / State
+# =========================
+state/
+memory/
+cache/
+sessions/
+runs/
+
+# =========================
+# Do Not Ignore Canonical Docs
+# =========================
+!README.md
+!docs/**
+!public/**
+!reference/**
+!paper/**
+!LICENSE
