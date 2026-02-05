@@ -137,15 +137,17 @@ Unlabeled metaphor is invalid.
 
 7. When Metaphor Must Stop
 
+If a metaphor resolves disagreement without introducing testable structure, it is being misused and must be stopped.
+
 Metaphor use must cease when:
 
-Decisions are pending
+- Decisions are pending
 
-Safety is in question
+- Safety is in question
 
-Disagreement arises
+- Disagreement arises
 
-Promotion is considered
+- Promotion is considered
 
 At these points, return to Dr. Q or Guardian language.
 
@@ -191,3 +193,4 @@ They help us walk—but they do not choose the path.
 When the ground matters, look down.
 
 End of DOC-18
+
