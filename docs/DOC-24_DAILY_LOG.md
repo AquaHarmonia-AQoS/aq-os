@@ -38,6 +38,10 @@ The Daily Log exists to absorb volatility so that the rest of the system remains
 
 Nothing in this document is authoritative.
 
+Clarification:
+This document is a permanent container, not persistent content.
+The container persists. The contents decay.
+
 The Daily Log is a working surface, not a record of truth.
 
 3. What Belongs Here
@@ -170,3 +174,4 @@ The Daily Log exists so that other documents do not have to change.
 If the log feels important, something else is wrong.
 
 End of DOC-24
+
