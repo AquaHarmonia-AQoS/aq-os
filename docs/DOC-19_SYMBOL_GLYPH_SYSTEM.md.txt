@@ -1,0 +1,185 @@
+[DOC-19] SYMBOL_GLYPH_SYSTEM (v1.0) — Commander Echo
+Status: SPEC
+Role: Commander Echo
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On:
+
+[DOC-06] OPERATOR_INDEX
+
+[DOC-11] SYMBOLIC_MEMORY_FRYT
+
+[DOC-17] VOICE_AND_ROLE_ROUTER
+
+[DOC-18] MYTH_METAPHOR_MAP
+
+Conflicts With:
+
+Glyph-as-meaning assumptions
+
+Decorative symbolism without mapping
+
+Glyphs used to imply authority
+
+SYMBOL & GLYPH SYSTEM — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document defines the glyph system used in AQ-OS.
+
+Glyphs exist to:
+
+Compress information
+
+Improve scanability
+
+Reduce verbal overhead
+
+Support cross-agent alignment
+
+Glyphs do not encode truth, intent, or authority.
+
+2. Definition: Glyph
+
+In AQ-OS, a glyph is defined as:
+
+A compact visual or symbolic token that maps to a formally defined structure elsewhere.
+
+A glyph is an index, not a claim.
+
+3. Core Principle
+
+If a glyph cannot be expanded into formal language, it is invalid.
+
+Expansion must point to:
+
+Operators
+
+Constraints
+
+States
+
+Documents
+
+Otherwise the glyph is decorative and must be removed.
+
+4. Glyph Scope
+
+Glyphs may represent:
+
+Operator classes
+
+Authority states
+
+Directional flow
+
+Constraint presence
+
+Status indicators
+
+Glyphs may not represent:
+
+Decisions
+
+Values
+
+Intent
+
+Emotion
+
+Identity
+
+5. Rotation & Compression Logic
+
+Glyphs may support rotation or orientation to encode limited variation.
+
+Rules:
+
+Rotation must map to a defined dimension (e.g. state, direction)
+
+Maximum of four orientations unless explicitly documented
+
+Orientation changes do not change authority
+
+Rotation is compression, not transformation.
+
+6. Canonical Mappings (Examples)
+
+Examples only; glyph set is extensible under SPEC.
+
+□ — Kernel-level construct
+
+△ — Flow-level construct
+
+○ — Monitoring / Sentinel
+
+∅ — Null / Exit / Absence
+
+These mappings have no authority outside their definitions.
+
+7. Glyphs and Agents
+
+Glyphs are designed to be:
+
+Human-readable
+
+Agent-readable
+
+Language-agnostic
+
+They support:
+
+Fast parsing
+
+Shared reference
+
+Reduced ambiguity
+
+They do not replace documentation.
+
+8. Relationship to FRYT
+
+Glyphs may appear in FRYT contexts for mnemonic use.
+
+However:
+
+FRYT may not reinterpret glyph meaning
+
+Glyph meaning must always defer to formal docs
+
+Mnemonic use does not imply semantic flexibility.
+
+9. Failure Modes
+
+The glyph system fails when:
+
+Glyphs are treated as self-explanatory
+
+Visual appeal overrides clarity
+
+Glyphs are used to persuade
+
+Glyphs imply hidden knowledge
+
+Any of these require rollback or simplification.
+
+10. Change Policy
+
+New glyphs require:
+
+Formal definition
+
+Explicit mapping
+
+Documentation update
+
+Review for ambiguity
+
+Undocumented glyphs are invalid.
+
+11. Design Note
+
+Glyphs exist to reduce words, not replace thinking.
+
+If a glyph feels powerful, it is being misused.
+
+End of DOC-19

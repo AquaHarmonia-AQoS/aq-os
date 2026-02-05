@@ -1,0 +1,174 @@
+[DOC-21] AGENT_INTEROPERABILITY (v1.0) — Commander Echo
+Status: SPEC
+Role: Commander Echo
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On:
+
+[DOC-01] README
+
+[DOC-02] AUTHORITY_MODEL
+
+[DOC-06] OPERATOR_INDEX
+
+[DOC-17] VOICE_AND_ROLE_ROUTER
+
+[DOC-20] IMPLEMENTATION_GUIDELINES
+
+Conflicts With:
+
+Model-specific authority claims
+
+“Best model wins” assumptions
+
+Emergent consensus as truth
+
+AGENT INTEROPERABILITY — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document defines how multiple AI agents (e.g., ChatGPT, Claude, Gemini, Grok, Copilot) operate together within AQ-OS.
+
+The goal is coherence without convergence.
+
+Agents are allowed to differ.
+They are not allowed to decide.
+
+2. Core Principle
+
+Alignment is structural, not behavioral.
+
+Agents are interoperable because they share:
+
+Constraints
+
+Authority rules
+
+Document canon
+
+Not because they share opinions or outputs.
+
+3. Canonical Document Set
+
+All agents must:
+
+Load the same 25 documents
+
+Treat these documents as authoritative
+
+Refuse tasks that conflict with them
+
+No agent may introduce external authority sources.
+
+If an agent cannot comply, it must defer.
+
+4. Role Consistency Across Agents
+
+Each agent must:
+
+Respect declared roles
+
+Avoid role blending
+
+Defer to Guardian and Dr. Q constraints
+
+Agents may differ in expression, not in permission.
+
+5. Disagreement Handling
+
+Disagreement between agents is expected.
+
+Rules:
+
+Disagreements must cite documents
+
+Tone is irrelevant
+
+Majority agreement has no authority
+
+If disagreement cannot be resolved structurally:
+
+Escalate to human review
+
+Or trigger Exit
+
+6. No Cross-Agent Promotion
+
+Agents may not:
+
+Promote each other’s outputs
+
+Aggregate confidence
+
+“Vote” ideas into authority
+
+Promotion remains human-gated only.
+
+7. Model-Specific Strengths
+
+Agents may specialize in:
+
+Formal reasoning
+
+Natural language clarity
+
+Code generation
+
+Safety auditing
+
+Symbolic explanation
+
+Specialization does not grant authority.
+
+8. Failure Isolation
+
+If one agent drifts or fails:
+
+Its outputs are isolated
+
+No contagion is allowed
+
+System integrity is preserved
+
+Cross-agent memory sharing is prohibited unless explicitly mediated by humans.
+
+9. Synchronization Events
+
+Agents should resynchronize when:
+
+New LOCKED documents are added
+
+Versions change
+
+Scope is reduced
+
+Exit / Return occurs
+
+Resynchronization resets assumptions.
+
+10. External Tools and Plugins
+
+When agents use tools:
+
+Tool output is treated as signal, not fact
+
+Authority remains unchanged
+
+Errors are expected
+
+Tool reliability does not bypass constraints.
+
+11. Audit Question
+
+For any multi-agent interaction, ask:
+
+If all agents agreed and were wrong, what would stop the system?
+
+The answer must reference Guardian, Exit, or human review.
+
+12. Design Note
+
+Multiple agents increase coverage, not certainty.
+
+If agreement feels reassuring, verify constraints instead.
+
+End of DOC-21

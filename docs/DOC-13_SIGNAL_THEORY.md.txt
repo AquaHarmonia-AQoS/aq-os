@@ -1,0 +1,204 @@
+[DOC-13] SIGNAL_THEORY (v1.0) — Commander Echo
+Status: SPEC
+Role: Commander Echo
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On:
+
+[DOC-03] CORE_INVARIANTS
+
+[DOC-04] METABOLIC_CONSTRAINTS
+
+[DOC-06] OPERATOR_INDEX
+
+[DOC-12] TEMPORAL_MODEL
+
+Conflicts With:
+
+Signal-as-truth assumptions
+
+Noise suppression by confidence
+
+Meaning inferred from intensity
+
+SIGNAL THEORY — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document defines how signals are identified, handled, degraded, and terminated within AQ-OS.
+
+Signal theory exists to:
+
+Prevent over-interpretation
+
+Bound confidence
+
+Preserve fidelity under loss
+
+Signals inform, they do not decide.
+
+2. Definition: Signal
+
+In AQ-OS, a signal is defined as:
+
+A distinguishable variation that may carry information under constraint.
+
+A signal is:
+
+Context-dependent
+
+Noisy by default
+
+Non-authoritative
+
+Absence of noise is assumed impossible.
+
+3. Definition: Noise
+
+Noise is defined as:
+
+Any variation not reliably attributable to the target phenomenon.
+
+Noise includes:
+
+Random fluctuation
+
+Measurement error
+
+Context loss
+
+Compression artifacts
+
+Observer bias
+
+Noise is not failure; it is the baseline condition.
+
+4. Signal-to-Noise Ratio (SNR)
+
+SNR is treated as situational, not absolute.
+
+Rules:
+
+High SNR does not imply truth
+
+Low SNR does not imply uselessness
+
+SNR varies over time and context
+
+Confidence must track minimum plausible SNR, not maximum observed clarity.
+
+5. Signal Fidelity
+
+Fidelity refers to how much structure survives transformation.
+
+High fidelity requires:
+
+Minimal distortion
+
+Clear provenance
+
+Bounded compression
+
+Fidelity is always relative to a task, never global.
+
+6. Loss Is Inevitable
+
+All signal handling introduces loss.
+
+Sources of loss include:
+
+Transformation
+
+Summarization
+
+Transmission
+
+Time delay
+
+Human interpretation
+
+Loss must be assumed even when not measurable.
+
+7. Refraction, Scattering, Absorption
+
+Signals may degrade via:
+
+Refraction — bending due to context change
+
+Scattering — diffusion across multiple interpretations
+
+Absorption — disappearance into noise
+
+These are descriptive categories only.
+They carry no explanatory authority.
+
+8. Signal vs Meaning
+
+AQ-OS strictly separates:
+
+Signal — detectable variation
+
+Meaning — human interpretation
+
+Meaning is never intrinsic to a signal.
+
+Attempts to infer meaning directly from signal strength are invalid.
+
+9. Stop Conditions
+
+Signal processing must stop when:
+
+Noise dominates
+
+Interpretations diverge
+
+Confidence bounds widen
+
+Sentinel flags ambiguity
+
+Continuing beyond this point amplifies error.
+
+10. Love as Low-Loss Alignment (Technical Sense)
+
+Within AQ-OS, “love” is used only as shorthand for:
+
+Low-loss alignment across transformations.
+
+It does not imply:
+
+Care
+
+Intent
+
+Preference
+
+Moral stance
+
+If this shorthand causes confusion, it must be abandoned.
+
+11. Failure Modes
+
+Signal theory fails when:
+
+Signals are treated as instructions
+
+Repetition is mistaken for reliability
+
+Emotional salience overrides loss accounting
+
+Silence is treated as absence of signal
+
+These conditions trigger Guardian review.
+
+12. Design Note
+
+Signal theory in AQ-OS is intentionally conservative.
+
+The system prefers:
+
+Weak signals with honesty
+
+Over strong signals with distortion
+
+If signal handling feels exciting, something is wrong.
+
+End of DOC-13

@@ -1,0 +1,164 @@
+[DOC-23] CONTRARIAN_PROTOCOL (v1.0) — Dr. Q
+Status: SPEC
+Role: Dr. Q
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On:
+
+[DOC-03] CORE_INVARIANTS
+
+[DOC-09] GATING_PROMOTION_RULES
+
+[DOC-14] SENTINEL_AND_MONITORING
+
+[DOC-22] VERSIONING_AND_CHANGELOG
+
+Conflicts With:
+
+Reflexive opposition
+
+Debate-as-validation
+
+Negation without alternative structure
+
+CONTRARIAN PROTOCOL — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document defines the Contrarian Protocol, a structured method for distinguishing:
+
+Productive skepticism
+from
+
+Argumentation that exists only to oppose
+
+Contrarian behavior is allowed only when it increases system accuracy.
+
+2. Core Principle
+
+Disagreement is valuable only if it changes what would otherwise happen.
+
+Opposition without consequence is noise.
+
+3. Definition: Legitimate Contrarian
+
+A legitimate contrarian position must:
+
+Identify a specific assumption
+
+Explain why that assumption may fail
+
+Propose an alternative structure or test
+
+Accept falsification conditions
+
+Without these, the position is invalid.
+
+4. Definition: Degenerate Contrarian
+
+A degenerate contrarian exhibits one or more of:
+
+Position defined only in opposition
+
+Immediate reversal when consensus shifts
+
+Refusal to state a stable claim
+
+Endless demand for justification without offering structure
+
+This behavior consumes resources without adding information.
+
+5. Diagnostic Questions
+
+To evaluate a contrarian claim, ask:
+
+What assumption is being challenged?
+
+What would change if the contrarian is correct?
+
+What evidence or condition would falsify the claim?
+
+What alternative action or constraint is proposed?
+
+If any answer is missing, halt engagement.
+
+6. Structural Tests
+
+A contrarian claim passes only if it:
+
+Can be mapped to existing constraints
+
+Introduces a testable alternative
+
+Does not rely on negation alone
+
+Claims that merely delay action without increasing clarity fail.
+
+7. Interaction with Sentinel
+
+Sentinel treats degenerate contrarian behavior as:
+
+Soft violation if occasional
+
+Drift signal if persistent
+
+Repeated contrarian stalling may trigger Exit.
+
+8. Promotion Rules
+
+Contrarian insights may be promoted only if:
+
+They survive structural testing
+
+They improve failure mode coverage
+
+They reduce uncertainty or risk
+
+Being “interesting” is insufficient.
+
+9. Group Dynamics Warning
+
+In multi-agent or group settings:
+
+One contrarian is healthy
+
+Zero contrarians is dangerous
+
+Infinite contrarians is paralysis
+
+The protocol exists to keep exactly one lane open.
+
+10. When to Stop Engaging
+
+Engagement must stop when:
+
+The contrarian refuses to state conditions
+
+The contrarian shifts goals mid-discussion
+
+The discussion no longer affects decisions
+
+Stopping is not censorship; it is resource protection.
+
+11. Audit Question
+
+For any contrarian exchange, ask:
+
+What new constraint, test, or safeguard exists now that did not before?
+
+If the answer is “none,” the exchange was wasteful.
+
+12. Design Note
+
+The protocol is intentionally strict.
+
+It protects AQ-OS from:
+
+Endless debate
+
+False sophistication
+
+Mistaking resistance for rigor
+
+Skepticism is a tool, not an identity.
+
+End of DOC-23

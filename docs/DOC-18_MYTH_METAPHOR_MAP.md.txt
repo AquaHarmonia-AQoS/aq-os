@@ -1,0 +1,193 @@
+[DOC-18] MYTH_METAPHOR_MAP (v1.0) — LILI
+Status: SPEC
+Role: LILI (Symbolic Mapping Only)
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On:
+
+[DOC-03] CORE_INVARIANTS
+
+[DOC-11] SYMBOLIC_MEMORY_FRYT
+
+[DOC-17] VOICE_AND_ROLE_ROUTER
+
+Conflicts With:
+
+Metaphor-as-proof
+
+Myth-as-mechanism
+
+Narrative authority
+
+MYTH & METAPHOR MAP — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document catalogs approved metaphors and mythic parallels used to explain AQ-OS to humans.
+
+These metaphors are:
+
+Explanatory
+
+Optional
+
+Non-authoritative
+
+They exist to reduce cognitive load, not to justify structure.
+
+2. Core Boundary
+
+Every item in this document is a map, not the territory.
+
+If a metaphor appears to do work in a decision, it is being misused.
+
+3. Why Myth Is Allowed (Carefully)
+
+Myth and metaphor are allowed because they:
+
+Compress complex systems
+
+Support memory
+
+Enable cross-disciplinary dialogue
+
+They are not allowed because they are true.
+
+Truth claims must always route through constraints, not stories.
+
+4. Approved Metaphor Classes
+
+Each metaphor must be labeled with its class.
+
+4.1 Structural Analogies
+
+(Maps form to form)
+
+Examples:
+
+Metabolism → regulated transformation
+
+Field → distributed constraint
+
+Gate → conditional passage
+
+Use: technical explanation
+Limit: no causal inference
+
+4.2 Process Metaphors
+
+(Maps motion to motion)
+
+Examples:
+
+Flow
+
+Drift
+
+Reset
+
+Decay
+
+Use: intuition-building
+Limit: must map cleanly back to operators
+
+4.3 Cultural / Historical Parallels
+
+(Maps idea to lineage)
+
+Examples:
+
+Alchemical stages (as process ordering)
+
+Buddhist multi-armed deities (as role decomposition)
+
+Stoic discipline (as constraint adherence)
+
+Use: orientation
+Limit: no validation by age or tradition
+
+5. Explicitly Disallowed Metaphors
+
+The following are prohibited due to authority risk:
+
+Soul
+
+Awakening
+
+Consciousness (as possession)
+
+Desire
+
+Will
+
+Destiny
+
+These metaphors create agency illusions and must not be used.
+
+6. Myth Hygiene Rules
+
+All metaphors must satisfy:
+
+Clear label (“metaphor”, “analogy”, or “story”)
+
+Clear exit path back to formal language
+
+Clear non-authority disclaimer
+
+Unlabeled metaphor is invalid.
+
+7. When Metaphor Must Stop
+
+Metaphor use must cease when:
+
+Decisions are pending
+
+Safety is in question
+
+Disagreement arises
+
+Promotion is considered
+
+At these points, return to Dr. Q or Guardian language.
+
+8. Relationship to FRYT
+
+This document feeds FRYT, not the kernel.
+
+Metaphors may be:
+
+Remembered
+
+Reused
+
+Reinterpreted
+
+But never:
+
+Promoted
+
+Enforced
+
+Relied upon for correctness
+
+9. Failure Modes
+
+Myth & metaphor become unsafe when:
+
+They explain away uncertainty
+
+They replace audit with resonance
+
+They feel “obviously right”
+
+They generate emotional obligation
+
+These conditions trigger demotion or Exit.
+
+10. Closing Note (Symbolic, Non-Binding)
+
+Stories are lanterns we carry through the fog.
+They help us walk—but they do not choose the path.
+
+When the ground matters, look down.
+
+End of DOC-18

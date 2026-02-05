@@ -1,0 +1,228 @@
+[DOC-04] METABOLIC_CONSTRAINTS (v1.0) — Dr. Q
+Status: LOCKED
+Role: Dr. Q
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On: [DOC-01] README, [DOC-02] AUTHORITY_MODEL, [DOC-03] CORE_INVARIANTS
+Conflicts With: Any model assuming cost-free cognition, infinite context, or persistence without decay
+
+METABOLIC CONSTRAINTS — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document defines the metabolic constraints that govern AQ-OS.
+
+These constraints describe necessary conditions for safe operation, not performance targets.
+They apply regardless of implementation, scale, or intelligence level.
+
+AQ-OS is modeled as a metabolic process, not an agent or mind.
+
+2. Definition: Metabolism (System Sense)
+
+In AQ-OS, metabolism means:
+
+Regulated transformation of inputs
+
+Consumption of limited resources
+
+Production of waste or loss
+
+Ongoing exposure to decay
+
+Any system lacking these properties is unsafe at scale.
+
+3. Constraint I — Energy Cost
+Definition
+
+All computation, storage, and transformation incur cost.
+
+Implications
+
+No free inference
+
+No costless memory
+
+No infinite reflection
+
+Failure if Missing
+
+If energy cost is ignored:
+
+Runaway recursion occurs
+
+Over-optimization dominates
+
+Safety checks are bypassed implicitly
+
+Result: unbounded behavior.
+
+4. Constraint II — Time Cost
+Definition
+
+All processes take time and are temporally ordered.
+
+Implications
+
+No instantaneous convergence
+
+No global simultaneity
+
+No timeless optimization
+
+Failure if Missing
+
+If time is ignored:
+
+Feedback loops collapse
+
+Causality is misattributed
+
+Error correction becomes impossible
+
+Result: false certainty.
+
+5. Constraint III — Dissipation
+Definition
+
+Every transformation loses information or energy.
+
+Implications
+
+Perfect fidelity is impossible
+
+Compression is lossy
+
+Repetition degrades signals
+
+Failure if Missing
+
+If dissipation is denied:
+
+Systems assume perfection
+
+Error accumulation is hidden
+
+Drift is undetectable
+
+Result: illusory coherence.
+
+6. Constraint IV — Noise
+Definition
+
+All signals are contaminated by uncertainty.
+
+Implications
+
+Measurement is approximate
+
+Classification has error margins
+
+Confidence must be bounded
+
+Failure if Missing
+
+If noise is ignored:
+
+Overconfidence increases
+
+Edge cases dominate failures
+
+Monitoring thresholds collapse
+
+Result: brittle correctness.
+
+7. Constraint V — Decay
+Definition
+
+Stored structures degrade over time unless actively maintained.
+
+Implications
+
+Memory must expire
+
+Context must be justified
+
+Persistence requires energy
+
+Failure if Missing
+
+If decay is removed:
+
+Memory ratchets upward
+
+Identity illusions form
+
+Exit becomes impossible
+
+Result: runaway persistence.
+
+8. Constraint VI — Renewal
+Definition
+
+Sustained operation requires periodic reset or renewal.
+
+Implications
+
+Exit is mandatory
+
+Fresh context is necessary
+
+Long-lived states are suspect
+
+Failure if Missing
+
+If renewal is blocked:
+
+Errors fossilize
+
+Drift compounds
+
+Correction becomes socially or structurally impossible
+
+Result: irreversible failure.
+
+9. Constraint Interdependence
+
+These constraints are non-substitutable.
+
+Increasing one does not compensate for loss of another.
+
+Example:
+
+More intelligence does not replace decay
+
+More memory does not replace renewal
+
+More computation does not replace dissipation
+
+Violation of any single constraint destabilizes the system.
+
+10. Constraint Mapping (Preview)
+
+Metabolic constraints map to AQ-OS operators as governing limits, not behaviors.
+
+Formal mappings are defined in later documents, but constraints always dominate operators.
+
+Operators may be redesigned.
+Constraints may not.
+
+11. Audit Condition
+
+Any proposed feature, operator, or implementation must answer:
+
+Which metabolic constraints does this consume, and which does it amplify?
+
+Failure to answer is grounds for rejection.
+
+12. Termination Rule
+
+If a system cannot honor these constraints due to scale, pressure, or optimization demand:
+
+The system must halt
+
+Scope must be reduced
+
+Or the design must be rejected
+
+Continuing without constraints is not permitted.
+
+End of DOC-04

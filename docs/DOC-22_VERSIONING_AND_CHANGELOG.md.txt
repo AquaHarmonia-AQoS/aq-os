@@ -1,0 +1,225 @@
+[DOC-22] VERSIONING_AND_CHANGELOG (v1.0) — Guardian
+Status: LOCKED
+Role: Guardian
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On:
+
+[DOC-02] AUTHORITY_MODEL
+
+[DOC-05] EXIT_RETURN_PROTOCOL
+
+[DOC-09] GATING_PROMOTION_RULES
+
+[DOC-21] AGENT_INTEROPERABILITY
+
+Conflicts With:
+
+Silent updates
+
+Rolling changes without review
+
+“Minor tweak” rationalizations
+
+VERSIONING & CHANGELOG — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document defines how AQ-OS changes over time.
+
+Change is treated as a primary risk vector, not a neutral activity.
+
+AQ-OS may evolve, but only in ways that are:
+
+Explicit
+
+Traceable
+
+Reversible
+
+Human-approved
+
+2. Core Principle
+
+If a change cannot be explained, it cannot be made.
+
+Stability is not inertia.
+Stability is maintained clarity.
+
+3. Versioning Scheme
+
+AQ-OS uses semantic versioning at the document level.
+
+Format:
+
+vMAJOR.MINOR
+
+MAJOR
+
+Invariant changes
+
+Authority model changes
+
+Constraint changes
+
+Requires:
+
+Human approval
+
+Full system review
+
+Explicit publication note
+
+MINOR
+
+Clarifications
+
+Non-breaking refinements
+
+Documentation improvements
+
+Requires:
+
+Documentation update
+
+Changelog entry
+
+Guardian review
+
+4. Document-Level Versioning
+
+Each document must declare:
+
+Current version
+
+Last updated date
+
+Dependency list
+
+Conflict list
+
+Undeclared changes are invalid.
+
+5. Changelog Requirements
+
+Every change must record:
+
+What changed
+
+Why it changed
+
+What it affects
+
+What it does not affect
+
+Vague entries are treated as missing.
+
+6. Change Categories
+6.1 Editorial Changes
+
+Wording clarity
+
+Formatting
+
+Examples
+
+Allowed without version bump only if meaning is unchanged.
+
+6.2 Specification Changes
+
+Operator definition updates
+
+Threshold adjustments
+
+Clarified constraints
+
+Require:
+
+MINOR version bump
+
+Explicit rationale
+
+6.3 Invariant Changes
+
+Core principles
+
+Authority structure
+
+Safety guarantees
+
+Require:
+
+MAJOR version bump
+
+Human approval
+
+Public justification
+
+7. Prohibited Change Patterns
+
+The following are forbidden:
+
+Silent edits
+
+Retroactive justification
+
+“Temporary” constraint relaxation
+
+Backfilling rationale after deployment
+
+If discovered, Exit is required.
+
+8. Change Propagation
+
+When a document changes:
+
+All dependent documents must be reviewed
+
+Conflicts must be re-evaluated
+
+Agents must resynchronize
+
+Skipping propagation is a violation.
+
+9. Rollback Policy
+
+Rollback is always allowed.
+
+Rules:
+
+Rollback does not require justification
+
+Rollback supersedes optimization
+
+Rollback may invalidate recent work
+
+Rollback is a safety tool, not a failure signal.
+
+10. Publication Discipline
+
+Public releases must:
+
+Declare version
+
+Include changelog
+
+Identify breaking changes
+
+Restate invariants
+
+Unversioned publication is prohibited.
+
+11. Audit Question
+
+For any proposed change, ask:
+
+What failure mode does this introduce if we are wrong?
+
+If the answer is unclear, the change is denied.
+
+12. Final Guardrail
+
+If change feels easy, it is probably unsafe.
+
+AQ-OS evolves slowly by design.
+
+End of DOC-22

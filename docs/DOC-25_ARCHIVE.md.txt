@@ -1,0 +1,174 @@
+[DOC-25] ARCHIVE (v1.0) — Cold Storage
+Status: ARCHIVE
+Role: None (Non-Executable)
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On: None
+Conflicts With:
+
+Active reasoning
+
+Execution authority
+
+Implicit reuse
+
+ARCHIVE — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document defines the Archive, the terminal state for AQ-OS materials.
+
+The Archive exists to:
+
+Preserve lineage
+
+Support audit
+
+Contain retired material safely
+
+The Archive has zero execution authority.
+
+2. Core Principle
+
+Nothing in the Archive is active.
+
+Presence in the Archive means:
+
+It does not run
+
+It does not decide
+
+It does not influence outcomes
+
+Archive is memory without metabolism.
+
+3. What Belongs in the Archive
+
+The Archive may contain:
+
+Retired operators
+
+Deprecated metaphors
+
+Superseded documents
+
+Historical notes
+
+Prior versions
+
+These items are preserved as artifacts, not options.
+
+4. What Does NOT Belong in the Archive
+
+The Archive must not contain:
+
+Active constraints
+
+Safety logic
+
+Live operators
+
+Working drafts
+
+Unreviewed material
+
+If something might still matter, it does not belong here yet.
+
+5. Archive Semantics
+
+Archive semantics are read-only.
+
+Rules:
+
+No execution
+
+No promotion
+
+No automatic reintroduction
+
+No implied endorsement
+
+Archive content is inert by definition.
+
+6. Reintroduction Rules
+
+Reintroducing archived material requires:
+
+Explicit extraction
+
+Rewriting as new material
+
+Full review under current constraints
+
+New document ID or version
+
+Archived material cannot be “revived.”
+
+7. Archive and Memory Decay
+
+Archive content does not decay internally.
+
+Instead:
+
+It is decoupled from operation
+
+It has no metabolic cost
+
+It is ignored by default
+
+Forgetting is achieved by non-reference, not deletion.
+
+8. Audit Use
+
+Archive may be used to:
+
+Trace design evolution
+
+Understand past decisions
+
+Diagnose historical failure modes
+
+Archive may not be used to:
+
+Justify current design
+
+Argue precedent
+
+Claim inevitability
+
+History is context, not authority.
+
+9. Access Discipline
+
+Accessing the Archive must be deliberate.
+
+Rules:
+
+No automatic lookup
+
+No default inclusion
+
+No blending with active docs
+
+Archive access should feel slow and manual.
+
+10. Failure Modes
+
+The Archive becomes dangerous when:
+
+It is mined for justification
+
+Old ideas bypass current gates
+
+Nostalgia replaces audit
+
+“We used to…” arguments appear
+
+These conditions indicate governance failure.
+
+11. Final Guardrail
+
+The Archive remembers so the system does not have to.
+
+AQ-OS remains safe by letting the past stay past.
+
+End of DOC-25

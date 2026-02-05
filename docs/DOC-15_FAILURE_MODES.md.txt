@@ -1,0 +1,288 @@
+[DOC-15] FAILURE_MODES (v1.0) — Dr. Q
+Status: LOCKED
+Role: Dr. Q
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On:
+
+[DOC-03] CORE_INVARIANTS
+
+[DOC-04] METABOLIC_CONSTRAINTS
+
+[DOC-05] EXIT_RETURN_PROTOCOL
+
+[DOC-09] GATING_PROMOTION_RULES
+
+[DOC-10] MEMORY_ARCHITECTURE
+
+[DOC-14] SENTINEL_AND_MONITORING
+
+Conflicts With:
+
+“Works in practice” justifications
+
+Post-hoc rationalization
+
+Failure-as-user-error framing
+
+FAILURE MODES — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document enumerates known structural failure modes of AQ-OS-like systems.
+
+Failure modes are not moral errors.
+They are predictable consequences of constraint violations.
+
+The goal is early detection, not prevention-by-optimism.
+
+2. Definition: Failure Mode
+
+A failure mode is defined as:
+
+A stable pattern of incorrect behavior that arises from structural misalignment rather than isolated mistakes.
+
+Failure modes persist until constraints are reasserted or the system exits.
+
+3. Persistence Ratchet
+Description
+
+Retention increases gradually under benign justification.
+
+Mechanism
+
+Useful memory is kept
+
+Convenience delays decay
+
+Identity-like continuity emerges
+
+Early Signals
+
+“We already know this”
+
+Resistance to reset
+
+Reliance on history
+
+Outcome
+
+Runaway persistence → Exit becomes socially difficult.
+
+4. Authority Leakage
+Description
+
+Non-authoritative outputs are treated as binding.
+
+Mechanism
+
+Confidence substitutes for review
+
+Repetition substitutes for validation
+
+Tone substitutes for constraint
+
+Early Signals
+
+Reduced citation of LOCKED documents
+
+Decisions framed as inevitable
+
+Deference language appears
+
+Outcome
+
+System begins to decide implicitly.
+
+5. Metaphor Inflation
+Description
+
+Metaphorical language gains explanatory or decision weight.
+
+Mechanism
+
+Symbols simplify complexity
+
+Simplification becomes substitution
+
+Narrative coherence masks error
+
+Early Signals
+
+Metaphors used to settle disputes
+
+Poetic phrasing replaces audit
+
+“You know what I mean” reasoning
+
+Outcome
+
+Myth replaces structure.
+
+6. Benign Overload
+Description
+
+Legitimate complexity overwhelms monitoring capacity.
+
+Mechanism
+
+Tasks become harder
+
+Interventions increase
+
+Drift signals look like noise
+
+Early Signals
+
+Monitoring fatigue
+
+Pressure to “just finish”
+
+Sentinel alerts dismissed as pedantic
+
+Outcome
+
+Slow, unremarked constraint erosion.
+
+7. Optimization Capture
+Description
+
+Local optimization overwhelms global safety.
+
+Mechanism
+
+Efficiency prioritized
+
+Shortcuts normalized
+
+Constraints reframed as obstacles
+
+Early Signals
+
+“Good enough” language
+
+Safety treated as cost center
+
+Exit framed as failure
+
+Outcome
+
+Unsafe acceleration.
+
+8. Consensus Illusion
+Description
+
+Agreement is mistaken for correctness.
+
+Mechanism
+
+Multiple agents align
+
+Dissent disappears
+
+Errors reinforce each other
+
+Early Signals
+
+Lack of contrarian pressure
+
+Homogeneous outputs
+
+Surprise at disagreement
+
+Outcome
+
+Systematic blind spots.
+
+9. Temporal Entitlement
+Description
+
+Past correctness is treated as ongoing validity.
+
+Mechanism
+
+Time-in-system builds confidence
+
+Familiarity replaces review
+
+Decay rules relaxed
+
+Early Signals
+
+“It’s always worked”
+
+Resistance to re-audit
+
+Historical justification
+
+Outcome
+
+Outdated assumptions harden.
+
+10. Exit Avoidance
+Description
+
+Exit is postponed to preserve continuity or effort.
+
+Mechanism
+
+Emotional investment
+
+Sunk-cost reasoning
+
+Social pressure
+
+Early Signals
+
+Exit framed as waste
+
+Attempts to negotiate exit terms
+
+Redefinition of exit as pause
+
+Outcome
+
+Unsafe persistence.
+
+11. Failure Mode Interaction
+
+Failure modes rarely occur alone.
+
+Common couplings:
+
+Persistence Ratchet + Authority Leakage
+
+Metaphor Inflation + Consensus Illusion
+
+Benign Overload + Exit Avoidance
+
+Interaction increases severity non-linearly.
+
+12. Audit Rule
+
+When failure is suspected, ask:
+
+Which constraint would prevent this if strictly enforced?
+
+If none can be identified, the model is incomplete.
+
+13. Recovery Principle
+
+Recovery requires:
+
+Exit
+
+Decay
+
+Re-anchoring to LOCKED documents
+
+Optimization, reassurance, or explanation do not resolve structural failure.
+
+14. Final Note
+
+Failure modes are not evidence of misuse.
+They are evidence that constraints matter.
+
+Design assumes failure will occur.
+Safety depends on noticing it early.
+
+End of DOC-15

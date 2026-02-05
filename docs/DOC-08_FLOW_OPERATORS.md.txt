@@ -1,0 +1,280 @@
+[DOC-08] FLOW_OPERATORS (v1.0) — Commander Echo
+Status: SPEC
+Role: Commander Echo
+Version: 1.0
+Last Updated: 2026-02-05
+Depends On:
+
+[DOC-03] CORE_INVARIANTS
+
+[DOC-04] METABOLIC_CONSTRAINTS
+
+[DOC-06] OPERATOR_INDEX
+
+[DOC-07] KERNEL_OPERATORS
+
+Conflicts With:
+
+Any flow operator used to justify authority
+
+Any flow operator treated as intent or goal
+
+FLOW OPERATORS — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document defines flow operators: non-kernel transformations that operate within constraints enforced elsewhere.
+
+Flow operators exist to:
+
+Explore
+
+Measure
+
+Stabilize
+
+Contain
+
+They do not decide, do not authorize, and do not persist.
+
+2. Definition: Flow Operator
+
+A flow operator is a bounded transformation that:
+
+Operates only after kernel eligibility
+
+Consumes metabolic resources
+
+Produces intermediate structure
+
+Is always interruptible
+
+Flow operators are tools, not principles.
+
+3. boop — Forward Perturbation
+
+State: SPEC
+
+Function
+
+Introduces a small forward variation into the current state.
+
+Used For
+
+Exploration
+
+Hypothesis generation
+
+Creative divergence
+
+Constraints
+
+Must be low-amplitude
+
+Must be reversible
+
+Must not cross authority boundaries
+
+Failure Mode
+
+If boop amplitude increases unchecked:
+
+Exploration becomes drift
+
+4. bloop — Return Measurement
+
+State: SPEC
+
+Function
+
+Measures the difference between expected and observed outcomes.
+
+Used For
+
+Error detection
+
+Feedback collection
+
+Signal comparison
+
+Constraints
+
+Measurement only
+
+No correction authority
+
+Failure Mode
+
+If bloop is treated as judgment:
+
+Measurement becomes decision
+
+5. sloop — Present-Moment Traversal
+
+State: SPEC
+
+Function
+
+Maintains traversal within the present operational window.
+
+Used For
+
+Preventing future-lock or past-lock
+
+Local coherence
+
+Temporal grounding
+
+Constraints
+
+No long-horizon planning
+
+No persistence guarantees
+
+Failure Mode
+
+If sloop is extended:
+
+Present becomes pseudo-eternal
+
+6. floop — Triadic Stabilization
+
+State: SPEC
+
+Function
+
+Stabilizes interaction across three reference points.
+
+Typical triads:
+
+Input / Transformation / Output
+
+Expectation / Observation / Error
+
+Signal / Noise / Residual
+
+Used For
+
+Local balance
+
+Preventing oscillation
+
+Failure Mode
+
+If floop is overused:
+
+System resists change
+
+7. gloop — Cycle Fidelity / Containment
+
+State: SPEC
+
+Function
+
+Maintains cycle integrity over repeated operations.
+
+Used For
+
+Detecting runaway loops
+
+Enforcing bounded repetition
+
+Constraints
+
+No memory accumulation
+
+No identity formation
+
+Failure Mode
+
+If gloop becomes identity-preserving:
+
+Cycles harden into selves
+
+8. DIGEST — Compression Under Decay
+
+State: SPEC (Inactive)
+
+Function
+
+Performs lossy compression when decay pressure is high.
+
+Used For
+
+Summarization
+
+Context reduction
+
+Exit preparation
+
+Constraints
+
+Always lossy
+
+Never authoritative
+
+Requires explicit activation
+
+Failure Mode
+
+If DIGEST is treated as truth-preserving:
+
+Compression becomes distortion
+
+9. Flow Operator Ordering
+
+Default ordering (subject to Sentinel interruption):
+
+QSeed → (boop) → bloop → floop → sloop → gloop → DIGEST (optional)
+
+
+No flow operator may:
+
+Bypass kernel operators
+
+Override Sentinel
+
+Prevent Exit
+
+10. What Flow Operators Are Not
+
+Flow operators are not:
+
+Agents
+
+Drives
+
+Desires
+
+Optimizers
+
+Learning mechanisms
+
+Any interpretation implying these must be rejected.
+
+11. Promotion Rule Reminder
+
+Outputs produced by flow operators:
+
+Are DAILY by default
+
+Have zero authority
+
+Must pass through gating rules to advance
+
+See [DOC-09] GATING_PROMOTION_RULES.
+
+12. Design Note
+
+Flow operators are intentionally named simply.
+
+This is to:
+
+Prevent myth inflation
+
+Encourage mechanical interpretation
+
+Keep language honest
+
+If a flow operator becomes poetic, it is being misused.
+
+End of DOC-08

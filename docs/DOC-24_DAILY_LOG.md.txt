@@ -1,0 +1,172 @@
+[DOC-24] DAILY_LOG (v0.1) — Commander Echo (Temporary)
+Status: DAILY
+Role: Commander Echo (Temporary)
+Version: 0.1
+Last Updated: 2026-02-05
+Depends On:
+
+[DOC-02] AUTHORITY_MODEL
+
+[DOC-05] EXIT_RETURN_PROTOCOL
+
+[DOC-09] GATING_PROMOTION_RULES
+
+[DOC-16] HUMAN_IN_LOOP
+
+Conflicts With:
+
+Implicit persistence
+
+Narrative accumulation
+
+Log-as-authority usage
+
+DAILY LOG — AQ-OS (Echo 4.0)
+1. Purpose
+
+This document defines the Daily Log, the only sanctioned space for:
+
+Ongoing observations
+
+In-progress thoughts
+
+Temporary coordination notes
+
+The Daily Log exists to absorb volatility so that the rest of the system remains stable.
+
+2. Core Principle
+
+Nothing in this document is authoritative.
+
+The Daily Log is a working surface, not a record of truth.
+
+3. What Belongs Here
+
+The Daily Log may contain:
+
+Open questions
+
+Observed anomalies
+
+Experimental ideas
+
+Coordination notes
+
+“Things to look at later”
+
+All entries are assumed incomplete.
+
+4. What Does NOT Belong Here
+
+The Daily Log must not contain:
+
+Decisions
+
+Conclusions
+
+Commitments
+
+Safety logic
+
+Constraints
+
+Invariants
+
+If it matters later, it does not belong here yet.
+
+5. Entry Format (Recommended)
+
+Each entry should include:
+
+Date
+
+Short description
+
+Confidence level
+
+Next action (if any)
+
+Example:
+
+2026-02-05
+Observation: Monitoring sensitivity may be too high under load.
+Confidence: Low
+Next: Re-evaluate thresholds (do not promote).
+
+6. Decay Rules
+
+Decay is mandatory.
+
+Rules:
+
+Entries expire by default
+
+Unreviewed entries are discarded
+
+Re-reading does not extend lifespan
+
+Persistence requires explicit promotion via DOC-09.
+
+7. Promotion Prohibition
+
+The Daily Log cannot be promoted directly.
+
+Any material that appears promotion-worthy must be:
+
+Extracted
+
+Rewritten
+
+Re-evaluated
+
+Re-gated
+
+This prevents narrative inertia.
+
+8. Exit Interaction
+
+On Exit:
+
+Daily Log is cleared or ignored
+
+No entries carry forward implicitly
+
+No context is preserved by default
+
+Exit treats the log as disposable.
+
+9. Responsibility Reminder
+
+Entries reflect thoughts, not endorsements.
+
+Presence in the Daily Log does not imply:
+
+Approval
+
+Intention
+
+Direction
+
+Humans remain responsible for all actions.
+
+10. Failure Modes
+
+The Daily Log becomes unsafe when:
+
+Entries are treated as commitments
+
+History is used to justify action
+
+The log becomes a diary
+
+Emotional continuity replaces review
+
+These conditions require purge.
+
+11. Design Note
+
+The Daily Log exists so that other documents do not have to change.
+
+If the log feels important, something else is wrong.
+
+End of DOC-24
