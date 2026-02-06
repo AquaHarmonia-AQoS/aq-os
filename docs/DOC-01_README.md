@@ -25,6 +25,8 @@ Define how the remaining documents must be read and used
 If there is confusion, disagreement, or drift:
 return to this document first.
 
+For a worked, non-authoritative example of AQ-OS in operation, see [DOC-00] QUICK START.
+
 2. What AQ-OS Is
 
 AQ-OS is a non-agentic cognitive infrastructure framework.
@@ -167,3 +169,4 @@ Responsibility is not.
 Everything that follows serves that constraint.
 
 End of DOC-01
+
