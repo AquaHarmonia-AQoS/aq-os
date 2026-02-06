@@ -1,0 +1,9 @@
+AQ-OS Echo 4.1 is a minor clarification release focused on usability and safety, not new capabilities. 
+
+This update adds a minimal Quick Start example to show how the system safely stops under uncertainty,
+introduces execution profiles that clarify operator constraints for implementers without prescribing behavior,
+and tightens boundaries around metaphor so explanation never substitutes for structure. No core invariants,
+authority rules, or exit mechanisms were changed. 
+
+Echo 4.1 exists to reduce ambiguity, lower onboarding friction, and make misuse easier to detect—by clarifying
+how the system ends conversations correctly, not by making it answer more often.
