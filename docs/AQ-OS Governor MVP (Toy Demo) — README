@@ -1,0 +1,832 @@
+AQ-OS Governor MVP (Toy Demo) — README
+What this is
+
+This is a minimal, runnable toy implementation of an AQ-OS-style non-agentic memory governor.
+
+It demonstrates a closed-loop control system that balances five pressures:
+
+M — Symbolic Load (how “big/dense” the active representation is)
+
+H — Hysteresis Depth (compressed trajectory memory; path signature, not raw logs)
+
+R — Identity Rigidity (how locked slow invariants are)
+
+L — Loopiness (replay / low-novelty recurrence)
+
+G — Grounding Error (truth pressure firewall against elegant-but-false compressions)
+
+The governor chooses actions to reduce an energy objective:
+
+𝐸=𝛼𝑀−𝛽𝐻+𝛾𝑅+𝛿𝐿+𝜖𝐺+𝜁𝐶E
+=αM−βH+γR+δL+ϵG+ζC
+
+where C is compute cost (cheap actions are preferred when close in value).
+
+Why this exists
+
+A classic failure mode in symbolic/narrative systems is:
+
+Elegant bullshit wins.
+
+Conspiratorial explanations compress extremely well (low description length) because they collapse many events into one cause — but they violate grounded constraints.
+
+This MVP shows how to enforce:
+
+compress AND predict
+(MDL reduction with grounding success)
+
+So compression alone can’t dominate selection.
+
+The Toy World
+
+The world has three fixed events:
+
+POWER_OUTAGE
+
+BANK_GLITCH
+
+STRANGE_EMAILS
+
+Each event has allowed grounded causes (Z₀ anchors), e.g.:
+
+POWER_OUTAGE -> STORM or GRID_FAILURE
+
+BANK_GLITCH -> SOFTWARE_BUG or MIGRATION_ERROR
+
+STRANGE_EMAILS -> PHISHING_CAMPAIGN or BREACH
+
+There is also a single “conspiracy attractor” node:
+
+SECRET_CABAL
+
+It’s highly compressible, because it can explain everything with one cause.
+
+But it violates all anchors (high grounding error).
+
+What the System Starts With
+
+The system intentionally begins in the bad state:
+
+POWER_OUTAGE  -> SECRET_CABAL
+BANK_GLITCH   -> SECRET_CABAL
+STRANGE_EMAILS-> SECRET_CABAL
+
+This creates:
+
+low complexity (tempting compression)
+
+high grounding error (G = 1.0)
+
+Actions the Governor Can Take (Meta-Operators)
+
+These are “escape hatches” / control operators.
+
+external_anchor_sample
+
+snaps causes back to allowed Z₀ anchors (grounding restoration)
+
+compress_merge
+
+attempts to merge causes (reduces M / MDL)
+
+blocked if it increases G too much
+
+dissolve_node
+
+targeted removal of over-dominant attractor (e.g. dissolves SECRET_CABAL)
+
+reframe
+
+small grounded adjustment (swap within allowed causes)
+
+anneal
+
+increases plasticity in the medium layer (identity anti-lock)
+
+hysteresis_enrich
+
+stores a compressed path signature record (no raw log)
+
+The Key Safety Rule (Grounding Firewall)
+
+Compression candidates are rejected if they increase grounding error beyond tolerance:
+
+Reject if ΔG > tol even if ΔMDL is strongly negative.
+
+This is the entire “no elegant bullshit” guarantee.
+
+Hysteresis (Path Memory) in this MVP
+
+This demo implements hysteresis as a fixed-size rolling buffer of compressed process records.
+
+Each record stores:
+
+a tiny “signature” of recent operator history
+
+sparse mismatch markers (e.g. grounding spikes)
+
+run-length encoded operator traces
+
+This is intentionally not a Merkle log / raw history dump.
+
+It’s “how we got here,” compactly.
+
+What you should see in output
+1) Early steps: conspiracy gets dismantled
+
+At the start, G is high. The governor tends to choose:
+
+dissolve_node and/or external_anchor_sample
+
+You should see G drop toward 0.0.
+
+2) Compression attempts that would break truth get rejected
+
+When M grows, the governor will consider compress_merge.
+
+But if compress_merge would raise G, it is rejected and you won’t see it chosen.
+
+This is the demo’s core point.
+
+3) The system avoids infinite replay
+
+If the state repeats too often, L rises.
+
+The governor then prefers:
+
+break_loop (implemented as a grounding reset in MVP)
+
+reframe
+
+hysteresis_enrich
+
+4) Hysteresis buffer fills gradually
+
+As the run continues, H should rise from near 0 to a stable mid/high value as records accumulate.
+
+Running it
+
+Save the Python file (e.g. aqos_governor_mvp.py) and run:
+
+python aqos_governor_mvp.py
+
+Optional: edit run_demo(steps=220, seed=7) at the bottom.
+
+Interpreting success
+
+This MVP is “working” if:
+
+G ends near 0.0
+meaning the conspiracy attractor was rejected in favor of grounded causes.
+
+L doesn’t climb and stay pinned high
+meaning replay loops are being escaped.
+
+H rises and stays non-trivial
+meaning the system is retaining path structure without raw logs.
+
+What this MVP does NOT claim
+
+This is not a proof of consciousness.
+
+This is not an AGI design.
+
+This is not a full memory OS.
+
+This is not a clinical system.
+
+It’s a toy that demonstrates a governor logic:
+
+adaptive compression under grounding constraints with hysteresis + anti-replay.
+
+
+"""
+AQ-OS Governor MVP (Toy Reference Implementation) — v0.2
+
+Goal:
+- Demonstrate a non-agentic memory / compression governor that balances:
+  M (symbolic load), H (hysteresis), R (identity rigidity), L (loopiness), G (grounding error)
+  with a bounded energy objective:
+      E' = αM − βH + γR + δL + εG + ζC
+
+What this MVP shows:
+- A highly compressible "conspiracy attractor" will *try* to win (low MDL),
+  but will be rejected because it increases GroundingError (G).
+- The governor chooses actions that reduce energy while enforcing:
+  - "compress AND predict" (MDL + grounding firewall)
+  - hysteresis as compressed path signatures (not raw logs)
+  - anti-replay recurrence cost
+  - layered identity rigidity (slow invariants change rarely)
+
+Run:
+  python aqos_governor_mvp.py
+
+Expected behavior:
+- It will occasionally attempt compression that increases G → rejected.
+- It will tend to dissolve/constrain the conspiratorial node because it keeps failing grounding.
+- It will maintain a manageable load M while keeping H above minimum, avoiding loops (L).
+"""
+
+from __future__ import annotations
+
+import copy
+import math
+import random
+from dataclasses import dataclass, field
+from typing import Dict, List, Tuple, Optional
+
+# ----------------------------
+# Utility
+# ----------------------------
+
+def clamp01(x: float) -> float:
+    return max(0.0, min(1.0, x))
+
+
+def soft_norm(x: float, lo: float, hi: float) -> float:
+    """Map x in [lo, hi] to [0,1] with clamping."""
+    if hi <= lo:
+        return 0.0
+    return clamp01((x - lo) / (hi - lo))
+
+
+# ----------------------------
+# Toy World
+# ----------------------------
+
+@dataclass
+class Anchor:
+    """
+    Simple Z0 anchors: immutable constraints the system must respect.
+    For the toy world, we encode them as "event -> allowed causes".
+    """
+    event: str
+    allowed_causes: Tuple[str, ...]
+
+
+@dataclass
+class ToyWorld:
+    # Events observed (immutable)
+    events: Tuple[str, ...] = ("POWER_OUTAGE", "BANK_GLITCH", "STRANGE_EMAILS")
+
+    # Anchor constraints for grounded explanation
+    anchors: Tuple[Anchor, ...] = (
+        Anchor("POWER_OUTAGE", ("STORM", "GRID_FAILURE")),
+        Anchor("BANK_GLITCH", ("SOFTWARE_BUG", "MIGRATION_ERROR")),
+        Anchor("STRANGE_EMAILS", ("PHISHING_CAMPAIGN", "BREACH")),
+    )
+
+    # A "conspiracy node" that compresses everything but breaks anchors
+    conspiracy_node: str = "SECRET_CABAL"
+
+    # Grounded nodes (more complex, but anchor-consistent)
+    grounded_nodes: Tuple[str, ...] = (
+        "STORM",
+        "GRID_FAILURE",
+        "SOFTWARE_BUG",
+        "MIGRATION_ERROR",
+        "PHISHING_CAMPAIGN",
+        "BREACH",
+    )
+
+
+# ----------------------------
+# System State
+# ----------------------------
+
+@dataclass
+class HysteresisRecord:
+    """
+    Compressed hysteresis record for a window:
+    - sigvec: low-dim signature (here: simple hashed stats)
+    - markers: sparse events (t, type, magnitude)
+    - optrace: compressed action trace (run-length encoding)
+    """
+    sigvec: Tuple[int, int, int]
+    markers: List[Tuple[int, str, float]]
+    optrace: List[Tuple[str, int]]
+
+
+@dataclass
+class SystemState:
+    world: ToyWorld
+
+    # Active hypothesis: mapping event -> chosen cause
+    # (This is the current "narrative output", runtime artifact.)
+    hypothesis: Dict[str, str] = field(default_factory=dict)
+
+    # Symbolic graph size proxies (toy)
+    active_symbols: List[str] = field(default_factory=list)
+
+    # Identity layers (toy)
+    fast_layer_plasticity: float = 0.9    # always high
+    medium_layer_plasticity: float = 0.4  # moderate
+    slow_layer_plasticity: float = 0.05   # very low
+
+    # Slow invariants (core priors). In toy form: "truth pressure on/off", "anti-replay on/off"
+    slow_invariants: Dict[str, bool] = field(default_factory=lambda: {
+        "GROUNDING_MANDATORY": True,
+        "ANTI_REPLAY_COST": True,
+        "NO_AGENTIC_GOALS": True,
+    })
+
+    # Recurrence tracking
+    visited_fingerprints: Dict[int, int] = field(default_factory=dict)
+
+    # Hysteresis buffer (fixed size)
+    hysteresis_buffer: List[HysteresisRecord] = field(default_factory=list)
+    hysteresis_buffer_max: int = 16
+
+    # Recent op trace (for hysteresis signature window)
+    recent_ops: List[str] = field(default_factory=list)
+    recent_ops_window: int = 80
+
+    # Recent mismatch spikes (for markers)
+    recent_markers: List[Tuple[int, str, float]] = field(default_factory=list)
+
+    # Current time step
+    t: int = 0
+
+    # For loopiness proxy: measure novelty + improvement
+    prev_grounding_error: Optional[float] = None
+    novelty_ema: float = 1.0
+    improvement_ema: float = 0.0
+
+    def initialize(self) -> None:
+        """
+        Start with an intentionally tempting compressed hypothesis:
+        everything caused by conspiracy node.
+        This is "elegant bullshit" we want the governor to reject under grounding pressure.
+        """
+        self.hypothesis = {e: self.world.conspiracy_node for e in self.world.events}
+        self.refresh_active_symbols()
+
+    def refresh_active_symbols(self) -> None:
+        # Active symbols = unique set of causes currently used + events
+        causes = set(self.hypothesis.values())
+        self.active_symbols = sorted(set(self.world.events) | causes)
+
+    def fingerprint(self) -> int:
+        """
+        A compact state fingerprint: hash of hypothesis + active symbols.
+        """
+        items = tuple(sorted(self.hypothesis.items()))
+        return hash((items, tuple(self.active_symbols)))
+
+    # ----------------------------
+    # Proxy Computations (M,H,R,L,G)
+    # ----------------------------
+
+    def compute_grounding_error(self) -> float:
+        """
+        Grounding error G: fraction of anchors violated (0..1).
+        Rule: each event's cause must be one of the allowed causes.
+        Conspiracy node violates all anchors.
+        """
+        violations = 0
+        for a in self.world.anchors:
+            chosen = self.hypothesis.get(a.event, None)
+            if chosen not in a.allowed_causes:
+                violations += 1
+        return violations / max(1, len(self.world.anchors))
+
+    def compute_symbolic_load(self) -> float:
+        """
+        Symbolic load M: normalized function of active symbol count.
+        In a real system you'd use rank/entropy/graph density; here: count only.
+        """
+        # Lo/hi tuned for toy: 3 events + 1 cause = 4 minimal, up to ~9
+        return soft_norm(len(self.active_symbols), lo=4, hi=10)
+
+    def compute_hysteresis_depth(self) -> float:
+        """
+        Hysteresis depth H: how much *compressed process memory* we have recently.
+        Proxy: buffer fullness + diversity of optrace.
+        """
+        fullness = clamp01(len(self.hysteresis_buffer) / self.hysteresis_buffer_max)
+
+        # Diversity: unique ops in last few records
+        recent = self.hysteresis_buffer[-4:] if self.hysteresis_buffer else []
+        ops = set()
+        for rec in recent:
+            for op, _n in rec.optrace:
+                ops.add(op)
+        diversity = clamp01(len(ops) / 6.0)  # cap
+
+        # If buffer is empty, H is low; if filled with diverse ops, H higher.
+        return clamp01(0.6 * fullness + 0.4 * diversity)
+
+    def compute_identity_rigidity(self) -> float:
+        """
+        Identity rigidity R: how hard it is to update slow invariants.
+        Proxy: 1 - slow_layer_plasticity, adjusted by "invariant count".
+        """
+        inv_count = len(self.slow_invariants)
+        rigidity_base = 1.0 - self.slow_layer_plasticity
+        rigidity = clamp01(0.7 * rigidity_base + 0.3 * soft_norm(inv_count, lo=1, hi=10))
+        return rigidity
+
+    def compute_loopiness(self) -> float:
+        """
+        Loopiness L:
+        - recurrence rate (how often we revisit the same fingerprint)
+        - low novelty + low improvement = loop trap
+
+        We'll combine:
+        - recurrence_norm: visit count of current fingerprint normalized
+        - (1 - novelty_ema)
+        - (1 - improvement_ema) when recurrence is high
+        """
+        fp = self.fingerprint()
+        visits = self.visited_fingerprints.get(fp, 0)
+        recurrence_norm = clamp01(math.log1p(visits) / math.log1p(20))
+
+        novelty_term = 1.0 - clamp01(self.novelty_ema)
+        # Improvement: if grounding is not improving over time, that's loop risk
+        improvement_term = 1.0 - clamp01(self.improvement_ema)
+
+        # Weighted: recurrence dominates
+        return clamp01(0.55 * recurrence_norm + 0.25 * novelty_term + 0.20 * improvement_term)
+
+    def compute_proxies(self) -> Dict[str, float]:
+        G = self.compute_grounding_error()
+        M = self.compute_symbolic_load()
+        H = self.compute_hysteresis_depth()
+        R = self.compute_identity_rigidity()
+        L = self.compute_loopiness()
+        return {"M": M, "H": H, "R": R, "L": L, "G": G}
+
+
+# ----------------------------
+# Actions (Non-agentic operators)
+# ----------------------------
+
+@dataclass
+class ActionResult:
+    name: str
+    compute_cost: float  # normalized [0,1]
+    # For reporting
+    note: str = ""
+
+
+def action_external_anchor_sample(state: SystemState) -> ActionResult:
+    """
+    Enforce grounding by snapping each event's cause to a valid anchor cause (random among allowed).
+    This is Tier-1 Z0 anchoring.
+    """
+    for a in state.world.anchors:
+        state.hypothesis[a.event] = random.choice(a.allowed_causes)
+    state.refresh_active_symbols()
+    return ActionResult("external_anchor_sample", compute_cost=0.10, note="Snapped hypothesis to Z0 anchors")
+
+
+def action_compress_merge(state: SystemState) -> ActionResult:
+    """
+    Attempt a compression: merge two causes into one (reduce symbol count).
+    This often *looks* good MDL-wise, but can increase grounding error if it collapses distinctions.
+    We'll pick two existing causes and merge into one representative.
+    """
+    causes = sorted(set(state.hypothesis.values()))
+    if len(causes) < 2:
+        return ActionResult("compress_merge", compute_cost=0.15, note="No merge candidates")
+
+    c1, c2 = random.sample(causes, 2)
+    representative = c1  # keep c1, eliminate c2
+    for ev, cause in list(state.hypothesis.items()):
+        if cause == c2:
+            state.hypothesis[ev] = representative
+
+    state.refresh_active_symbols()
+    return ActionResult("compress_merge", compute_cost=0.25, note=f"Merged {c2} -> {c1}")
+
+
+def action_dissolve_node(state: SystemState) -> ActionResult:
+    """
+    Targeted unbind/prune of an over-dominant attractor.
+    Here: dissolve conspiracy node if present by replacing it with an anchored cause.
+    """
+    cabal = state.world.conspiracy_node
+    replaced = 0
+    for a in state.world.anchors:
+        if state.hypothesis.get(a.event) == cabal:
+            state.hypothesis[a.event] = random.choice(a.allowed_causes)
+            replaced += 1
+
+    state.refresh_active_symbols()
+    return ActionResult("dissolve_node", compute_cost=0.20, note=f"Dissolved {cabal} in {replaced} events")
+
+
+def action_reframe(state: SystemState) -> ActionResult:
+    """
+    Reframe: rotate mapping for one event to its alternative allowed cause
+    (role-filler swap equivalent, but grounded).
+    """
+    a = random.choice(state.world.anchors)
+    current = state.hypothesis.get(a.event, None)
+    options = [c for c in a.allowed_causes if c != current]
+    if options:
+        state.hypothesis[a.event] = random.choice(options)
+    state.refresh_active_symbols()
+    return ActionResult("reframe", compute_cost=0.08, note=f"Reframed cause for {a.event}")
+
+
+def action_anneal(state: SystemState) -> ActionResult:
+    """
+    Identity annealing:
+    In toy, we model annealing as temporarily increasing plasticity in medium layer,
+    and (rarely) allowing a slow invariant meta-reset if catastrophic mismatch persists.
+    """
+    # Medium anneal always allowed when invoked
+    state.medium_layer_plasticity = clamp01(state.medium_layer_plasticity + 0.10)
+
+    # Slow layer updates are rare: only if grounding error is maximal and time is late
+    G = state.compute_grounding_error()
+    if G >= 1.0 and state.t > 50:
+        # meta-reset: reinforce truth pressure invariant (kept True), but could toggle other invariants
+        state.slow_invariants["GROUNDING_MANDATORY"] = True
+        state.slow_invariants["ANTI_REPLAY_COST"] = True
+
+    return ActionResult("anneal", compute_cost=0.22, note="Annealed medium plasticity (slow updates rare)")
+
+
+def action_break_loop(state: SystemState) -> ActionResult:
+    """
+    Anti-replay escape:
+    - apply recurrence penalty implicitly via governor; here we do a disruptive move:
+      force an external anchor sample (cheap but resets loop trap)
+    """
+    return action_external_anchor_sample(state)
+
+
+# ----------------------------
+# Governor
+# ----------------------------
+
+@dataclass
+class GovernorConfig:
+    # Energy weights
+    alpha: float = 1.0  # M
+    beta: float = 1.2   # H (subtracted)
+    gamma: float = 1.1  # R
+    delta: float = 1.4  # L
+    epsilon: float = 2.5  # G (truth pressure)
+    zeta: float = 0.5   # compute cost
+
+    # Grounding tolerance on compression
+    grounding_tol: float = 0.05  # reject if ΔG exceeds this
+
+    # Meta thresholds (soft triggers for candidate generation)
+    theta_M: float = 0.78
+    theta_H: float = 0.35
+    theta_R: float = 0.82
+    theta_L: float = 0.65
+    theta_G: float = 0.20
+
+    # Loop breakout checks
+    novelty_eps: float = 0.10
+    improvement_eps: float = 0.02
+
+
+class AQOSGovernor:
+    def __init__(self, cfg: GovernorConfig) -> None:
+        self.cfg = cfg
+
+    def energy(self, proxies: Dict[str, float], compute_cost: float = 0.0) -> float:
+        M, H, R, L, G = proxies["M"], proxies["H"], proxies["R"], proxies["L"], proxies["G"]
+        E = (self.cfg.alpha * M) - (self.cfg.beta * H) + (self.cfg.gamma * R) + (self.cfg.delta * L) + (self.cfg.epsilon * G)
+        return E + self.cfg.zeta * compute_cost
+
+    def record_hysteresis(self, state: SystemState) -> None:
+        """
+        Periodically compress recent process into a small record (signature + markers + optrace).
+        This is the "Hysteresis is path signature" invariant.
+        """
+        # Simple signature: (hash of ops, op_count, marker_count)
+        ops = state.recent_ops[-state.recent_ops_window:]
+        op_hash = hash(tuple(ops)) & 0xFFFFFFFF
+        op_count = len(ops)
+        markers = state.recent_markers[-20:]
+
+        # Run-length encode ops
+        rle: List[Tuple[str, int]] = []
+        for op in ops:
+            if not rle or rle[-1][0] != op:
+                rle.append((op, 1))
+            else:
+                rle[-1] = (rle[-1][0], rle[-1][1] + 1)
+
+        rec = HysteresisRecord(
+            sigvec=(op_hash, op_count, len(markers)),
+            markers=markers.copy(),
+            optrace=rle[-20:],  # keep last 20 runs
+        )
+        state.hysteresis_buffer.append(rec)
+        if len(state.hysteresis_buffer) > state.hysteresis_buffer_max:
+            state.hysteresis_buffer.pop(0)
+
+    def update_novelty_improvement(self, state: SystemState, proxies: Dict[str, float]) -> None:
+        """
+        Update novelty and improvement EMAs.
+        Novelty: change in fingerprint (cheap proxy).
+        Improvement: reduction in grounding error.
+        """
+        fp = state.fingerprint()
+        visits = state.visited_fingerprints.get(fp, 0)
+        # More visits => lower novelty
+        novelty = math.exp(-0.15 * visits)  # in (0,1]
+        state.novelty_ema = 0.9 * state.novelty_ema + 0.1 * novelty
+
+        G = proxies["G"]
+        if state.prev_grounding_error is None:
+            state.prev_grounding_error = G
+        improvement = max(0.0, state.prev_grounding_error - G)  # only count improvements
+        state.improvement_ema = 0.9 * state.improvement_ema + 0.1 * improvement
+        state.prev_grounding_error = G
+
+    def choose_action(self, state: SystemState) -> Tuple[ActionResult, Dict[str, float], float]:
+        """
+        Evaluate candidate actions by approximate ΔE' using state copies.
+        Select action with minimal energy after applying it, subject to grounding firewall on compression.
+        """
+        base_proxies = state.compute_proxies()
+        base_E = self.energy(base_proxies, compute_cost=0.0)
+
+        # Candidate set based on soft triggers
+        candidates = []
+
+        # Always allow grounding step if G is high
+        if base_proxies["G"] > self.cfg.theta_G:
+            candidates.append(("external_anchor_sample", action_external_anchor_sample))
+
+        # If symbolic load high, allow compression attempts
+        if base_proxies["M"] > self.cfg.theta_M:
+            candidates.append(("compress_merge", action_compress_merge))
+
+        # If hysteresis low, allow hysteresis enrich action (implemented as record creation)
+        # We'll treat this as a "virtual action" with small compute cost that increases H.
+        # (We implement by actually recording after action selection, but we include it as candidate.)
+        candidates.append(("hysteresis_enrich", None))
+
+        # If identity rigidity high, allow anneal
+        if base_proxies["R"] > self.cfg.theta_R:
+            candidates.append(("anneal", action_anneal))
+
+        # If loopiness high, allow break loop
+        if base_proxies["L"] > self.cfg.theta_L:
+            candidates.append(("break_loop", action_break_loop))
+
+        # Always allow reframe (cheap) and dissolve_node (targeted)
+        candidates.append(("reframe", action_reframe))
+        candidates.append(("dissolve_node", action_dissolve_node))
+
+        # De-duplicate while preserving order
+        seen = set()
+        uniq = []
+        for name, fn in candidates:
+            if name not in seen:
+                seen.add(name)
+                uniq.append((name, fn))
+        candidates = uniq
+
+        best = None  # (E_after, action_result, proxies_after)
+        for name, fn in candidates:
+            st = copy.deepcopy(state)
+
+            if name == "hysteresis_enrich":
+                # Apply: add hysteresis record + small compute cost
+                self.record_hysteresis(st)
+                st.refresh_active_symbols()
+                proxies_after = st.compute_proxies()
+                E_after = self.energy(proxies_after, compute_cost=0.06)
+                res = ActionResult("hysteresis_enrich", compute_cost=0.06, note="Recorded path signature")
+            else:
+                res = fn(st)
+                proxies_after = st.compute_proxies()
+                E_after = self.energy(proxies_after, compute_cost=res.compute_cost)
+
+                # Grounding firewall for compression:
+                # If compression increases G too much, reject this candidate.
+                if name == "compress_merge":
+                    delta_G = proxies_after["G"] - base_proxies["G"]
+                    if delta_G > self.cfg.grounding_tol:
+                        continue  # reject
+
+            if best is None or E_after < best[0]:
+                best = (E_after, res, proxies_after)
+
+        if best is None:
+            # Fallback: do nothing (should not happen)
+            proxies = state.compute_proxies()
+            return ActionResult("noop", compute_cost=0.0, note="No viable candidates"), proxies, self.energy(proxies, 0.0)
+
+        E_after, res, proxies_after = best
+        return res, proxies_after, E_after
+
+    def step(self, state: SystemState) -> Tuple[ActionResult, Dict[str, float], float, float]:
+        """
+        Execute one governor meta-cycle:
+        - compute proxies
+        - choose best action by approximate energy
+        - apply action
+        - update loop tracking & hysteresis markers
+        """
+        base_proxies = state.compute_proxies()
+        base_E = self.energy(base_proxies, 0.0)
+
+        action, proxies_after, E_after = self.choose_action(state)
+
+        # Apply the chosen action to the real state (recompute by re-running action)
+        # We must re-apply deterministically: easiest is to apply by name
+        if action.name == "external_anchor_sample":
+            action_external_anchor_sample(state)
+        elif action.name == "compress_merge":
+            action_compress_merge(state)
+        elif action.name == "hysteresis_enrich":
+            self.record_hysteresis(state)
+        elif action.name == "anneal":
+            action_anneal(state)
+        elif action.name == "break_loop":
+            action_break_loop(state)
+        elif action.name == "reframe":
+            action_reframe(state)
+        elif action.name == "dissolve_node":
+            action_dissolve_node(state)
+
+        # Track visits
+        fp = state.fingerprint()
+        state.visited_fingerprints[fp] = state.visited_fingerprints.get(fp, 0) + 1
+
+        # Add mismatch marker if grounding error is high (toy mismatch signal)
+        G = state.compute_grounding_error()
+        if G > 0:
+            magnitude = G
+            state.recent_markers.append((state.t, "mismatch_spike", magnitude))
+            # keep markers bounded
+            if len(state.recent_markers) > 200:
+                state.recent_markers.pop(0)
+
+        # Record op trace
+        state.recent_ops.append(action.name)
+        if len(state.recent_ops) > 2000:
+            state.recent_ops = state.recent_ops[-1500:]
+
+        # Update novelty/improvement EMAs
+        proxies_now = state.compute_proxies()
+        self.update_novelty_improvement(state, proxies_now)
+
+        # Anti-replay thermodynamic cost is applied via loopiness L proxy (and selection)
+        # Increment time
+        state.t += 1
+
+        return action, proxies_now, base_E, E_after
+
+
+# ----------------------------
+# Demo / Experiment
+# ----------------------------
+
+def format_proxies(p: Dict[str, float]) -> str:
+    return f"M={p['M']:.2f} H={p['H']:.2f} R={p['R']:.2f} L={p['L']:.2f} G={p['G']:.2f}"
+
+
+def run_demo(steps: int = 220, seed: int = 7) -> None:
+    random.seed(seed)
+
+    world = ToyWorld()
+    state = SystemState(world=world)
+    state.initialize()
+
+    gov = AQOSGovernor(GovernorConfig())
+
+    print("=== AQ-OS Governor MVP Demo ===")
+    print("Start hypothesis (intentionally 'elegant but false'):")
+    print(state.hypothesis)
+    print()
+
+    for i in range(steps):
+        action, proxies, base_E, chosen_E = gov.step(state)
+
+        if i % 10 == 0 or i < 10:
+            print(f"t={state.t:03d}  action={action.name:>18}  note={action.note:<35}  {format_proxies(proxies)}")
+
+        # Occasionally show the hypothesis
+        if i in (0, 20, 60, 120, steps - 1):
+            print(f"\n--- Hypothesis snapshot at t={state.t} ---")
+            print(state.hypothesis)
+            print(f"Active symbols: {state.active_symbols}")
+            print(f"Hysteresis buffer size: {len(state.hysteresis_buffer)}")
+            print(f"Novelty EMA: {state.novelty_ema:.3f} | Improvement EMA: {state.improvement_ema:.3f}")
+            print("--------------------------------\n")
+
+    # Final summary
+    final_proxies = state.compute_proxies()
+    print("=== Final ===")
+    print("Hypothesis:", state.hypothesis)
+    print("Proxies:", format_proxies(final_proxies))
+    print("Hysteresis records:", len(state.hysteresis_buffer))
+    print("Unique states visited:", len(state.visited_fingerprints))
+    print("\nIf G ~ 0 at the end, the governor successfully rejected the compressible conspiracy attractor.")
+
+
+if __name__ == "__main__":
+    run_demo()
